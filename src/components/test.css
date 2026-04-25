@@ -1,0 +1,37 @@
+.container {
+  position: relative; /* Establishes a positioning context for the children */
+  width: 200px;
+  height: 200px;
+}
+
+.bottom-div, .top-div {
+  position: absolute; /* Removes divs from the normal document flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-div {
+  background-color: blue;
+  z-index: 3221; /* Lower z-index places it at the bottom */
+}
+
+.top-div {
+  background-color: red;
+  opacity: 0.7; /* Added for visibility in the example */
+  z-index: 3222; /* Higher z-index places it on top */
+
+  animation: slideOutRight 2s ease-in-out forwards; 
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0); /* Start at original position */
+    opacity: 1; /* Start fully opaque */
+  }
+  to {
+    transform: translateX(-100vw); /* Move 100% of the viewport width to the right */
+    opacity: 0; /* Fade out as it moves */
+  }
+}

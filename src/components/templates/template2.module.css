@@ -1,0 +1,84 @@
+.page_container{
+    margin: 0px;
+    width: 810px;
+    background-color: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    padding: 30px 50px;
+    height: 1143px;
+    color:#000;
+    font-family: 'Raleway';
+    background-image: url("src/components/svg/wave-curve-1.svg");
+    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover; /* or contain, or specific dimensions like 50% 50% */
+    background-position-x: center;
+    background-position-y: bottom;
+}
+
+.wrapper {
+  border: 1px solid goldenrod;
+  display: grid;
+  grid-auto-rows: 1fr;
+  width: 100%;
+}
+
+.content{
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  position: relative;
+  width:100%;
+  height:100%;
+  border: 1px solid black;
+}
+
+.overlay{
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  background-color:blue;
+  position: relative;
+  width:100%;
+}
+
+.svg_background_div {
+    width: 100%; /* or a specific width */
+    height: 100vh; /* or a specific height, required for the div to be visible */
+    background-image: url("src/components/svg/wave-curve-1.svg"); /* Reference the SVG file */
+    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover; /* or contain, or specific dimensions like 50% 50% */
+    background-position: center; /* positions the image in the center */
+    background-color: #f0f0f0; /* a fallback background color visible behind transparent SVGs */
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.layer1{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: red;
+}
+.layer2{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    z-index:2;
+}
+/*
+ @page { size: A4 }
+        .sheet {
+            padding: 20mm;
+            background-color: #fafafa;
+            
+        }
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        h1, p {
+            margin: 0 0 10px;
+        }
+*/

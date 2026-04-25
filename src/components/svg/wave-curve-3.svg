@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <rect
+    width="80"
+    height="40"
+    x="10"
+    y="10"
+    style="fill: #cccccc; stroke: cadetblue; stroke-width: 2;" />
+</svg>
+  <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100vh;width:100px">
+    <path d="M0.00,49.98 C254.51,72.06 306.43,22.41 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none;
+  fill: rgb(237, 115, 115);">
+    </path>
+  </svg>

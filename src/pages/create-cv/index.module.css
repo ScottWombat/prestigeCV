@@ -1,0 +1,56 @@
+.container {
+  display: grid;
+  width:100%;
+  grid-template-areas: 
+  "title"
+  steps"
+  "content"
+  "button";
+
+  /* Optional: add some spacing between items */
+  gap: 1rem; 
+  margin-top:50px;
+  background-color: aquamarine;
+}
+
+/* Example styling for the items */
+.title{
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  color:#000;
+  text-align: center;
+  font-family: 'Poppins';
+  font-size: 24px;
+  width:100%;
+  grid-area: title
+}
+.steps{
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  grid-area:stypes;
+}
+.content{
+   grid-area:content;
+
+}
+.entry{
+  background-color: red;
+}
+.template{
+   background-color: blue;
+}
+
+.button{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-area:button;
+
+}
+.next{
+
+}
+.previous{
+
+}

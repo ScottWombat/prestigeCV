@@ -1,0 +1,122 @@
+.mainContent {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height: 900px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column; /* On smaller screens, change to column layout */
+  }
+  .left{
+    width: 100%
+  }
+  .right{
+    width: 100%;
+    
+  }
+}
+ .left {
+    width: 32%;
+    background-color: #e0e0e0;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+ .right {
+    width: 68%;
+    position: absolute;
+    /*right: 0;*/
+    height: 100%;
+    overflow-y: auto;
+}
+
+.printBtn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px 25px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #1e1e1ecc;
+    transition: ease-in-out 200ms;
+    z-index:4000;
+}
+
+.mainContent .printBtn:hover {
+    box-shadow: 0 0 25px 0 #4e4e4e;
+}
+
+.row {
+	width: 100%;
+    height: 100vh;
+	max-width: 1249px;
+	margin: 0 auto;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row; /* direction you want the boxes to sit */
+	background-color: palegreen;
+    gap:0;
+}
+.column1 {
+	width: 30%;
+     position: relative;
+    /*margin: 0 auto;*/
+    height: 100vh;
+    background-color: maroon;
+}
+.column2 {
+	width: 60%;
+    background-color: red;
+    height: 100vh;
+   
+    
+}
+.column3{
+    width: 10%;
+}
+.print_button_div{
+    width:100%;
+
+}
+.print_button{
+    float:right;
+    padding:5px;
+}
+
+.resume{
+    width: 80%;
+    background-color: #ccc;
+    position: relative;
+    margin: 0 auto;
+    height: 100vh;
+    
+}
+
+@media screen and (max-width: 767px) {
+    .row{
+        flex-direction: column;
+    }
+	.column1{
+		width: 100%;
+	}
+    .column2{
+		width: 100%;
+	}
+}

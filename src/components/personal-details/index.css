@@ -1,0 +1,508 @@
+:root {
+    --bg: #f0f2f7;
+    --white: #ffffff;
+    --surface: #f8f9fc;
+    --border: #e2e5ee;
+    --border-focus: #c5cadc;
+    --text: #111827;
+    --muted: #6b7280;
+    --subtle: #9ca3af;
+    --accent: #4f46e5;
+    --accent-light: #eef2ff;
+    --accent-hover: #4338ca;
+    --valid: #059669;
+    --valid-bg: #ecfdf5;
+    --valid-border: #6ee7b7;
+    --invalid: #dc2626;
+    --invalid-bg: #fef2f2;
+    --invalid-border: #fca5a5;
+    --warn: #d97706;
+    --ff-display: 'Sora', sans-serif;
+    --ff-body: 'Epilogue', sans-serif;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .07);
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --t: 200ms;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.personal-details {
+    padding: 50px;
+    font-family: var(--ff-display);
+}
+
+.personal-details-header {
+    color: #000;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .85rem;
+}
+
+/* ── Field ── */
+.field {
+    margin-bottom: 1.05rem;
+    position: relative;
+}
+
+.field label {
+    display: block;
+    font-size: .775rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: .38rem;
+    font-family: var(--ff-display);
+    letter-spacing: -.01em;
+    transition: color var(--t);
+}
+
+.req-star {
+    color: var(--accent);
+    margin-left: 2px;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap input,
+.input-wrap select {
+    width: 100%;
+    height: 42px;
+    padding: 0 2.6rem 0 .875rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--white);
+    font-family: var(--ff-body);
+    font-size: .875rem;
+    color: var(--text);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition:
+        border-color var(--t) var(--ease),
+        background var(--t) var(--ease),
+        box-shadow var(--t) var(--ease);
+}
+
+.input-wrap input::placeholder {
+    color: var(--subtle);
+}
+
+.input-wrap input:focus,
+.input-wrap select:focus {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, .1);
+}
+
+.input-wrap.has-select::after {
+    content: '';
+    position: absolute;
+    right: .9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--muted);
+    pointer-events: none;
+}
+
+/* status icon */
+.status-icon {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--t);
+}
+
+.icon-valid,
+.icon-invalid {
+    display: none;
+}
+
+.field-hint {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-top: .3rem;
+    display: block;
+    transition: opacity var(--t), height var(--t);
+}
+
+.field-error {
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--invalid);
+    margin-top: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity var(--t), height var(--t);
+}
+
+.field-error::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--invalid);
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════
+       CSS VALIDATION PSEUDO-CLASSES
+    ════════════════════════════════ */
+
+/* VALID */
+.input-wrap input:user-valid {
+    border-color: var(--valid-border);
+    background: var(--valid-bg);
+}
+
+@supports not selector(:user-valid) {
+    .input-wrap input:not(:placeholder-shown):valid {
+        border-color: var(--valid-border);
+        background: var(--valid-bg);
+    }
+}
+
+.input-wrap input:user-valid~.status-icon {
+    opacity: 1;
+}
+
+.input-wrap input:user-valid~.status-icon .icon-valid {
+    display: block;
+}
+
+.input-wrap input:user-valid~.status-icon .icon-invalid {
+    display: none;
+}
+
+@supports not selector(:user-valid) {
+    .input-wrap input:not(:placeholder-shown):valid~.status-icon {
+        opacity: 1;
+    }
+
+    .input-wrap input:not(:placeholder-shown):valid~.status-icon .icon-valid {
+        display: block;
+    }
+
+    .input-wrap input:not(:placeholder-shown):valid~.status-icon .icon-invalid {
+        display: none;
+    }
+}
+
+.field:has(input:user-valid) label {
+    color: var(--valid);
+}
+
+@supports not selector(:user-valid) {
+    .field:has(input:not(:placeholder-shown):valid) label {
+        color: var(--valid);
+    }
+}
+
+/* INVALID */
+.input-wrap input:user-invalid {
+    border-color: var(--invalid-border);
+    background: var(--invalid-bg);
+    animation: shake .3s var(--ease);
+}
+
+@supports not selector(:user-invalid) {
+    .input-wrap input:not(:placeholder-shown):invalid {
+        border-color: var(--invalid-border);
+        background: var(--invalid-bg);
+    }
+}
+
+.input-wrap input:user-invalid~.status-icon {
+    opacity: 1;
+}
+
+.input-wrap input:user-invalid~.status-icon .icon-valid {
+    display: none;
+}
+
+.input-wrap input:user-invalid~.status-icon .icon-invalid {
+    display: block;
+}
+
+@supports not selector(:user-invalid) {
+    .input-wrap input:not(:placeholder-shown):invalid~.status-icon {
+        opacity: 1;
+    }
+
+    .input-wrap input:not(:placeholder-shown):invalid~.status-icon .icon-valid {
+        display: none;
+    }
+
+    .input-wrap input:not(:placeholder-shown):invalid~.status-icon .icon-invalid {
+        display: block;
+    }
+}
+
+.field:has(input:user-invalid) label {
+    color: var(--invalid);
+}
+
+@supports not selector(:user-invalid) {
+    .field:has(input:not(:placeholder-shown):invalid) label {
+        color: var(--invalid);
+    }
+}
+
+.field:has(input:user-invalid) .field-error {
+    opacity: 1;
+    height: 1.1rem;
+}
+
+.field:has(input:user-invalid) .field-hint {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+@supports not selector(:user-invalid) {
+    .field:has(input:not(:placeholder-shown):invalid) .field-error {
+        opacity: 1;
+        height: 1.1rem;
+    }
+
+    .field:has(input:not(:placeholder-shown):invalid) .field-hint {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        margin: 0;
+    }
+}
+
+/* ── Layout ── */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .85rem;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1.2rem 0;
+    color: var(--subtle);
+    font-size: .75rem;
+}
+
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* SSO */
+.btn-sso {
+    width: 100%;
+    height: 42px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    font-family: var(--ff-body);
+    font-size: .84rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color var(--t), background-color var(--t), box-shadow var(--t);
+}
+
+.btn-sso:hover {
+    border-color: var(--border-focus);
+    background: var(--surface);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .07);
+}
+
+/* Checkbox */
+.check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .65rem;
+    margin: 1rem 0 1.35rem;
+}
+
+.check-row input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--white);
+    cursor: pointer;
+    transition: all var(--t);
+    position: relative;
+    top: 1px;
+}
+
+.check-row input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.check-row input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+}
+
+.check-row label {
+    font-size: .77rem;
+    color: var(--muted);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.check-row label a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.check-row label a:hover {
+    text-decoration: underline;
+}
+
+/* CTA */
+.btn-primary {
+    width: 100%;
+    height: 44px;
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--ff-display);
+    font-size: .88rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    transition: background-color var(--t), box-shadow var(--t), transform .15s;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 20px rgba(79, 70, 229, .32);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn-arrow {
+    transition: transform var(--t);
+}
+
+.btn-primary:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Strength bar */
+.pw-strength {
+    display: flex;
+    gap: 4px;
+    margin-top: .42rem;
+    height: 3px;
+}
+
+.pw-seg {
+    flex: 1;
+    border-radius: 99px;
+    background-color: var(--border);
+    transition: background-color .25s;
+}
+
+.pw-seg.w {
+    background: var(--invalid);
+}
+
+.pw-seg.f {
+    background: var(--warn);
+}
+
+.pw-seg.g {
+    background: var(--valid);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-3px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+@media (max-width: 680px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .form-panel {
+        padding: 2.5rem 1.75rem;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

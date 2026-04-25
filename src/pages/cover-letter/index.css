@@ -1,0 +1,40 @@
+@media screen {
+    body {
+        background: #f4f4f4;
+    }
+    .page {
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        margin: 10mm auto; /* Centers the page on screen */
+        margin-top: 100px;
+    }
+}
+
+/* Print-specific styles */
+@media print {
+    /* Define the A4 page size and margins for the print output */
+    @page {
+        size: A4 portrait; /* Sets the paper size to A4 and orientation to portrait */
+        margin: 10mm; /* Sets consistent margins for all pages */
+    }
+
+    body {
+        /* Reset margins for printing if needed */
+        margin: 0;
+    }
+
+    /* Styles for content containers that represent individual pages */
+    .page {
+        width: 210mm;
+        height: 297mm;
+        box-sizing: border-box;
+        page-break-after: always; /* Forces a page break after each element with class "page" */
+        margin: 0; /* Ensures no extra margins in print */
+        overflow: hidden; /* Helps contain content within the page bounds */
+    }
+
+    /* Avoid page breaks inside specific elements if necessary */
+    .no-break-inside {
+        page-break-inside: avoid;
+    }
+}

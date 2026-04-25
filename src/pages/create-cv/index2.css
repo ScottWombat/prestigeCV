@@ -1,0 +1,58 @@
+
+.cv_wrapper {
+
+  margin-top:15px;
+  color:#000;
+  display: flex;
+  flex-direction: column;
+  
+}
+.cv_header {
+    position: relative;  
+    text-align: center;
+    margin-top: 50px;
+    color:#000;
+    font-family: "Oswald",Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 28px;
+}
+.steps{
+  position: relative;
+  margin-top:20px;
+  text-align: center;
+}
+.cv_content_wrapper{
+  position: relative;
+  display: flex;
+  margin-top: 40px;
+  color: #000;
+}
+.cv_info{
+  float: left;
+  width:50%;
+}
+.cv_template{
+  float:right;
+  width:50%;
+}
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; /* Clears both left and right floats within the container */
+}
+.button_row{
+  display: inline-block;
+  width:100%;
+  background-color:plum;
+}
+.previous{
+  float:left;
+  width:50%;
+}
+.next{
+ float: right;
+  width:50%;
+}
+.next_button{
+  margin-right: 0;
+  text-align: right;
+}

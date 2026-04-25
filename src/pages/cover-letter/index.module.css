@@ -1,0 +1,35 @@
+.cl_top{
+    margin-top:50px;
+}
+
+.container1{
+     width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+}
+
+.container22{
+    height: 100%;
+    width:50%;
+    
+   
+    overflow: scroll;
+}
+
+.container2{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px; /* exact value is given through JavaScript */
+    border: 1px solid blue;
+    overflow: auto;
+
+}
+
+
+
+
+
+

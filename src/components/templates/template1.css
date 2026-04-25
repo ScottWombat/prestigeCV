@@ -1,0 +1,497 @@
+:root {
+  --primary-color: #78ffd6;
+  --secondary-color: #a8ff78;
+  --tertiary-color: #5f916e;
+  --quaternary-color: #4a7135;
+  --quinary-color: #4d7559;
+  --senary-color: #95cda6;
+  --septenary-color: #5e956e;
+  --octonary-color: #61a07b;
+  --nonary-color: #858585;
+  --background-color: rgba(255, 255, 255, 0.294);
+  --modal-background-color: rgba(255, 255, 255, 0.502);
+  --modal-shadow-color: rgba(0, 0, 0, .2);
+  --modal-description-color: #999999;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --hover-color: #95cda6;
+  --none-hover-color: #5f916e;
+  --progress-bar-color: rgba(74, 113, 53, 0.2);
+  --progress-bar-value-color: #61a07b;
+  --result-background-color: rgba(255, 255, 255, 0.8);
+  --scroll-color: #83b894;
+  --scroll-background-color: rgba(119, 117, 117, 0.28);
+  --disabled-color: #4c7959;
+}
+
+/* PDF */
+.pdf-page {
+  position: relative;
+
+  margin: 0 auto;
+
+  padding: 0.4in 0.3in;
+
+  color: #333;
+
+  background-color: #fff;
+
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+
+  box-sizing: border-box;
+}
+
+.pdf-page {
+  position: relative;
+
+  margin: 0 auto;
+
+  padding: 0.4in 0.3in;
+
+  color: #333;
+
+  background-color: #fff;
+
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+
+  box-sizing: border-box;
+}
+
+.pdf-header {
+  padding-bottom: 0.2in;
+
+  margin-bottom: 0.3in;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.invoice-number {
+  padding-top: 0.1in;
+
+  float: right;
+}
+
+.pdf-footer {
+  position: absolute;
+
+  bottom: 0.25in;
+
+  left: 0.3in;
+
+  right: 0.3in;
+
+  padding-top: 0.05in;
+
+  border-top: 1px solid #e5e5e5;
+
+  font-size: 0.9em;
+
+  text-align: left;
+
+  color: #787878;
+}
+
+.addresses {
+  font-size: 12px;
+}
+
+.addresses:after {
+  display: block;
+
+  content: "";
+
+  clear: both;
+}
+
+.for {
+  float: left;
+}
+
+.from {
+  float: right;
+}
+
+.addresses p {
+  color: #787878;
+
+  padding: 0.05in 0;
+
+  border-top: 1px solid #e5e5e5;
+}
+
+.addresses p:first-of-type {
+  border-top: 0;
+}
+
+.pdf-body {
+  margin-top: 0.3in;
+}
+
+.company-logo {
+  font-size: 1.8em;
+
+  font-weight: bold;
+
+  color: #3aabf0;
+}
+
+.signature {
+  padding-top: 0.3in;
+}
+
+/* Dimensions other than px and em should be divided by 1.33 for the proper PDF output */
+
+.size-a4 {
+  width: 6.2in;
+
+  height: 8.7in;
+}
+
+.size-letter {
+  width: 6.3in;
+
+  height: 8.2in;
+}
+
+.size-executive {
+  width: 5.4in;
+
+  height: 7.8in;
+
+  font-size: 12px;
+}
+
+.size-executive .pdf-header {
+  margin-bottom: 0.1in;
+}
+
+
+/* Circles on background */
+.circ {
+  position: fixed;
+  z-index: 3000;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: rotate 11s infinite linear;
+  background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+}
+
+.circ-1 {
+  opacity: 0.3;
+  height: 1760px;
+  width: 1920px;
+  top: 0;
+  right: -480px;
+  border-radius: 50%;
+  animation-duration: 15s;
+}
+
+.circ-2 {
+  height: 480px;
+  width: 480px;
+  top: -160px;
+  right: -240px;
+  border-radius: 50%;
+  animation-duration: 9s;
+}
+
+.circ-3 {
+  height: 480px;
+  width: 480px;
+  bottom: -80px;
+  left: -160px;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  animation-duration: 5s;
+}
+
+.header {
+  margin-top: 30px;
+}
+.header .full-name {
+  font-size: 40px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.header .first-name {
+  font-weight: 700;
+}
+.header .last-name {
+  font-weight: 300;
+}
+.header .contact-info {
+  margin-bottom: 20px;
+}
+.header .email,
+.header .phone {
+  color: #999;
+  font-weight: 300;
+}
+.header .separator {
+  height: 10px;
+  display: inline-block;
+  border-left: 2px solid #999;
+  margin: 0px 10px;
+}
+.header .position {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: underline;
+}
+
+.details {
+  line-height: 20px;
+}
+.details .section {
+  margin-bottom: 40px;
+}
+.details .section:last-of-type {
+  margin-bottom: 0px;
+}
+.details .section__title {
+  letter-spacing: 2px;
+  color: #54AFE4;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.details .section__list-item {
+  margin-bottom: 40px;
+}
+.details .section__list-item:last-of-type {
+  margin-bottom: 0;
+}
+.details .left,
+.details .right {
+  vertical-align: top;
+  display: inline-block;
+}
+.details .left {
+  width: 60%;
+}
+.details .right {
+  text-align: right;
+  width: 39%;
+}
+.details .name {
+  font-weight: bold;
+}
+.details a {
+  text-decoration: none;
+  color: #000;
+  font-style: italic;
+}
+.details a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+.details .skills__item {
+  margin-bottom: 10px;
+}
+.details .skills__item .right input {
+  display: none;
+}
+.details .skills__item .right label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #C3DEF3;
+  border-radius: 20px;
+  margin-right: 3px;
+}
+.details .skills__item .right input:checked + label {
+  background: #79A9CE;
+}
+/* new */
+.responsive-banner {
+  /*margin: 10px auto;*/
+  width: 100%;
+  min-width: 430px;
+  /*max-width: 570px;*/
+  max-width: 700px;
+  position: relative;
+  height: auto;
+  min-height: 800px;
+  max-height: 1000px;
+  border-radius: 0px;
+  overflow: hidden;
+	background-image: linear-gradient(to top right , #fff, #fafafa);
+	background-repeat: no-repeat;
+  /*box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+}
+span.test1:after,
+span.test1:before {
+  content: "";
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 150px;
+}
+.circle-a:before {
+  width: 500px;
+  height: 500px;
+  top: -300px; left: 52%;
+  -webkit-transform: translate(-50%,0);
+  -ms-transform: translate(-50%,0);
+  transform: translate(-50%,0);
+}
+.circle-a:after {
+  top: 160px;
+  right: 10%;
+}
+.circle-b:before {
+  top: 60%;
+  left: -25px;
+}
+.circle-b:after {
+  width: 250px;
+  height: 250px;
+  bottom: -70px;
+  right: -70px;
+}
+.line
+{
+    height: 0.5px;
+    background-color: rgb(87, 87, 87);
+    margin: 25px 0;
+    margin-bottom: 50px;
+}
+.head
+{
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    
+}
+.head, .main, .name
+{
+    font-size: 14px;
+   
+}
+.head .main  span:nth-child(2)
+{
+    color: rgb(100, 100, 100);
+    font-size: 55px;
+   
+    margin-left: 5px;
+}
+.head .main .post
+{
+font-weight: bold;
+}
+.head .contacts
+{
+    text-align: right;
+    padding-top: 7px;
+}
+.head .contacts .content
+{
+    font-weight: 500;
+    padding-right: 5px;
+}
+.head .contacts .symbol
+{
+    margin-right: 5px;
+    font-size: 15px;
+    width: 17px;
+    height: 17px;
+}
+.line
+{
+    height: 0.5px;
+    background-color: rgb(87, 87, 87);
+    margin: 25px 0;
+    margin-bottom: 0px;
+}
+.mainbody
+{
+    display: grid;
+    grid-template-columns: 10fr 1fr 17fr;
+    height: 900px;
+}
+.mainbody .border
+{
+    background-color: rgb(87, 87, 87);
+    width: 2px;
+    opacity: 2;
+    margin-top: 20px;
+}
+.mainbody .rightside
+{
+    padding-left: 15px;
+}
+.title
+{
+    font-weight: 700;
+    font-size: 18px;
+    border: none;
+    padding-bottom: 3px;
+    border-bottom: 2px greenyellow solid;
+}
+.skill
+{
+    margin-bottom: 6px;
+}
+button
+{
+    margin: 15px 0;
+}
+.language
+{
+    margin-bottom:6px;
+}
+.language span:nth-child(odd)
+{
+    font-weight: 700;
+}
+.edublock{
+    margin-bottom: 10px;
+}
+.edublock .head
+{
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.navbtn
+{
+position: fixed;
+top: 40%;
+left: 4%;
+transform: translate(-40%,-4%);
+height: 60px;
+width: 60px;
+border-radius: 50%;
+border:#fff 2px solid;
+transition: 300ms ease-in-out;
+box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+.navbtn:nth-child(2)
+{
+top: 50%;
+left: 4.4%;
+transform: translate(-50%,-4.4%);
+}
+.navbtn:nth-child(3)
+{
+top: 60%;
+left: 4.8%;
+transform: translate(-60%,-4.8%);
+}
+.navbtn:hover
+{
+    background-color: black;
+    color: #fff;
+    border: #000 2px solid;
+    height: 65px;
+    width: 65px;
+}
+.input-checkbox{
+    margin-right: 10px;
+}
+.education-head{
+    font-weight: 700;
+    font-size: 17px;
+}
