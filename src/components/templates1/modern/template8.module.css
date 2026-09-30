@@ -1,0 +1,180 @@
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.page_container {
+    margin: 0px;
+    width: 810px;
+    background-color: #fff;
+    /*box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;*/
+    padding: 30px 50px;
+    height: 1143px;
+    color: #000;
+    font-family: 'Raleway';
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow:auto;
+}
+.page_header{
+    width:100%;
+    height:346px;
+    background-image: url("/images/modern/modern_wave7.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    background-repeat: no-repeat;
+    background-position: cover;
+}
+.page_row{
+    width: 100%;
+   height:100Vh;
+   min-height: 100vh;
+}
+.image_cover {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center right;
+    border: 3px solid #fff;
+    margin-top: 20px;
+    margin-left: 0px;
+    box-shadow: 0 0 0 3px red; 
+}
+
+.image_wrapper {
+    width: 100%;
+    display: grid;
+    place-items: center;
+     bottom: 1px solid #000;
+}
+.page_contact{
+    display: flex;
+    flex-direction: row;
+}
+.name{
+    font-size: 2em;
+    font-family: 'Oswald';
+}
+.title{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.header_wrapper {
+    display: flex;
+    position: relative;
+    margin-top: 30px;
+    margin-left: 35px;
+    margin-right: 35px;
+    /*border-top: px solid #cccccc;*/
+    border-bottom: 0.1em solid rgba(114, 143, 206, 0.5);
+    padding-bottom: 5px;
+    font-weight:bold;
+}
+.para_wrapper {
+    display: flex;
+    position: relative;
+    color: rgba(0, 0, 0, 1);
+    text-align: justify;  
+    line-height: 20px;  
+    padding: 20px;
+    
+}
+
+.resume__section_title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2em;
+}
+.resume__section_title > i {
+  margin-right: 0.63em;
+  font-size: 1em;
+  background-color: #5695cd;
+  color: #fff;
+  border: 0.25em solid #aacae6;
+  border-radius: 50%;
+  width: 2.51em;
+  height: 2.51em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.6;
+}
+.resume__section_title > h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 65%;
+  padding: 10px;
+  height: 100%; /* Should be removed. Only for demonstration */
+  /*background-color: aqua;*/
+  margin-left:25px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.column2 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 100%; /* Should be removed. Only for demonstration */
+}
+
+.row{
+  height:650px;
+  /*background-color: blue;*/
+  display:flex;
+  align-items:flex-start;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  height:100%;
+  clear: both;
+}
+.ul_style{
+    list-style-type:square;
+    font-size: 1em;
+    margin-left:30px;
+}
+.ul_style > li::marker{
+    color:green;
+}
+
+.bar{
+  font-weight:bold;
+  margin-left: 7px;
+  margin-right: 5px;
+  color: #728FCE;
+}
+
+@media print {
+  body {
+    overflow: hidden !important;
+  }
+  .page_container {
+    overflow: visible !important;
+    height: auto !important;
+    /*break-after: page;
+    page-break-after: always;*/
+    page-break-before: always; /* Legacy support */
+    break-before: page;  
+  }
+  /* Hide unnecessary UI elements like navigation or buttons */
+  .no-print { display: none; }
+
+  /* Force new pages for each section */
+  section { break-before: page; }
+  @page {
+    size: A4 portrait; /* Defines page size (e.g., A4, Letter) */
+    margin: 20mm; /* Sets uniform margins for all pages */
+  }
+}
