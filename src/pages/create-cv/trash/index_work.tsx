@@ -2,23 +2,31 @@ import './test.scss';
 import React, { ReactNode, Ref, useState, useEffect, useRef, Fragment } from 'react';
 
 import ReactToPrint from "react-to-print";
-
-import { useParams } from "react-router";
+import { PersonInfo, CareerObjective } from '@components/accordion';
+import { useParams, useSearchParams, } from "react-router";
+import { useAppDispatch,useAppSelector } from '@store/hooks'
+import { useDispatch, useSelector } from 'react-redux';
+//import { AppDispatch } from '@store/index';
 import { useReactToPrint } from 'react-to-print';
 
 import { PersonalDetails } from '@components/personal-details'
 
 import { Test1 } from '@components/test1'
-
-
 import { EntrySection, TemplateSection, PersonalDetailsWrapper, EducationWrapper } from './createcv.styled'
+import { Button } from './form.styled';
+
+import styles from './form.module.css';
+
+import { UploadImage } from '@components/upload-image';
 
 import './index.css'
 import './new.css'
 
 import { Education } from '@components/education'
-//import { Template1 } from '@components/templates/template1';
+
 import TemplateLoader from '@utils/template-loader'
+
+import  NavigationButtons  from '@components/navigation-button';
 const steps = [
   {
     label: 'Personal Details',
@@ -60,6 +68,7 @@ type FooProps = {
   ref?: Ref<HTMLDivElement>;
 }
 */
+/*
 const ComponentToPrint = (props: { children: ReactNode, ref: Ref<HTMLDivElement> }) => {
   return (
     <div
@@ -74,14 +83,25 @@ const ComponentToPrint = (props: { children: ReactNode, ref: Ref<HTMLDivElement>
     </div>
   );
 };
+*/
 const CreateCV = (props) => {
+  const page = useAppSelector((state: any) => state.page.value);
+  const [currentPage,setCurrentPage] = useState(1)
+  
+  useEffect(() => {
+     setCurrentPage(page)
+  },[page])
+ 
+  const [step, setStep] = useState(0)
   const contentRef = useRef(null);
   const chartRef = useRef(null);
   const params = useParams();
+  const [search, setSearch] = useSearchParams();
   useEffect(() => {
-
-    setTemplateId(params.name)
-
+    // console.log(`Params:${params}`)
+    // setTemplateId(params.id)
+    // console.log(`Search:${search.get('id')}`)
+    setTemplateId(search.get('id'))
   }, [])
 
   const [templateId, setTemplateId] = useState('')
@@ -104,7 +124,7 @@ const CreateCV = (props) => {
   const displayedForm = (step: number) => {
     switch (step) {
       case 1:
-        return <PersonalDetails />
+        return <PersonalDetails state={{}}/>
       case 2:
         return (<>2</>)
       default:
@@ -117,21 +137,51 @@ const CreateCV = (props) => {
   const handlePrint = useReactToPrint({
     // @ts-ignore or use "as any"
     //content: () => componentRef.current,
-    documentTitle: 'RRR',
+    documentTitle: '',
     contentRef: componentRef,
-   
+
     pageStyle: `
-      @media print {
-        @page { margin: 0; }
-      }
-      body {
+      @page { 
+          margin: 150mm;
+          size: auto;
+      } 
+      @page :first { 
+          margin : 0mm;
+          size: auto;
+      } 
+      @media print { 
+       body {
+        -webkit-scrollbar { width: 0 !important }
         -webkit-print-color-adjust: exact;
         print-color-adjust:exact !important;
-}
       }
-    `,
+  }
+  `,
   });
+  const handlePrint_0ld = useReactToPrint({
+    // @ts-ignore or use "as any"
+    //content: () => componentRef.current,
+    documentTitle: '',
+    contentRef: componentRef,
 
+    pageStyle: `
+      @media print {
+        @page { 
+          margin: 0mm;
+          size: 210mm 297mm;
+        }
+      }
+      body {
+        -webkit-scrollbar { width: 0 !important }
+        -webkit-print-color-adjust: exact;
+        print-color-adjust:exact !important;
+      }
+  }
+  `,
+  });
+  const buttonOnClick = () => {
+    alert('d')
+  }
   return (
     <div className='create_cv_section'>
       <div className='ccv_header'>BUILD YOUR OWN CV1{templateId}</div>
@@ -169,35 +219,43 @@ const CreateCV = (props) => {
           </button>
         </div>
       </div>
-      <div className='ccv_content'>
-        
-        <div className="mainContent">
 
-          <Fragment>
-            <div className="row">
-              <div className="column1" >
-                <PersonalDetails />
-                <h2>Column 1</h2>
-                <p>Some text that is longer than the other. Some text that is longer than the other. Some text that is longer than the other. Some text that is longer than the other. Some text that is longer than the other. Some text that is longer than the other. Some text that is longer than the other.</p>
-              </div>
-              <div className="column2">
-                  <div className="print_button_div">
-                  <button className="print_button" onClick={handlePrint}>Print to PDF</button>
-                  </div>
-                  <div ref={componentRef}>
-                     <TemplateLoader index="1" />
-                  </div>
+      <div className="mainContent">
+        <Fragment>
+          <div className="row">
+            <div className="column1" >
+              <div className={styles.main}>
+                <div className='p_header'>
+                <div className="circle">{currentPage}</div>
+                <div>Person Info</div>
+                </div>
+                <UploadImage/>
+                <PersonInfo expended={true} />
+                <br />
+                <CareerObjective expended={true} />
+                <br/>
+                {displayedForm(currentPage)}
+                <NavigationButtons pageNo={page} backNo={currentPage -1} nextNo={currentPage +1}/>
                 
               </div>
+
             </div>
+            <div className="column2">
 
+              <div ref={componentRef}>
+                <TemplateLoader index={templateId} />
+              </div>
+            </div>
+            <div className='column3'>
+              <div className="print_button_div">
+                <button className="print_button" onClick={handlePrint}>Print to PDF</button>
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      </div >
+    </div >
 
-
-          </Fragment>
-        </div>
-
-      </div>
-    </div>
   )
 
 }

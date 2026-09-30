@@ -1,11 +1,12 @@
 .mainContent {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', Helvetica, sans-serif;
+    font-family: 'Poppins', Helvetica, sans-serif;
     display: flex;
     flex-direction: row;
     width:100%;
-    height: 900px;
+    /*height: 900px;*/
+
 }
 
 @media screen and (max-width: 600px) {
@@ -52,7 +53,7 @@
     cursor: pointer;
     background-color: #1e1e1ecc;
     transition: ease-in-out 200ms;
-    z-index:4000;
+    /*z-index:4000;*/
 }
 
 .mainContent .printBtn:hover {
@@ -75,11 +76,15 @@
     gap:0;
 }
 .column1 {
-	width: 30%;
+	width: 100%;
      position: relative;
-    /*margin: 0 auto;*/
+    /*margin: 0 auto;
+     background-color: maroon;
+    */
+    color:#000;
     height: 100vh;
     background-color: maroon;
+    z-index:5000;
 }
 .column2 {
 	width: 60%;
@@ -89,7 +94,8 @@
     
 }
 .column3{
-    width: 10%;
+    width: 15%;
+    background-color: #3498db;
 }
 .print_button_div{
     width:100%;
@@ -109,6 +115,80 @@
     
 }
 
+/* arrow left and right */
+.prev::before {
+    content: " ";
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    display: block;
+    margin-top:3px;
+}
+
+.next::before {
+    content: " ";
+    border-right: 4px solid #000;
+    border-top: 4px solid #000;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    display: block;
+    margin-top:3px;
+}
+.a{
+  display: inline-flex;
+  width: 47%;
+  padding-top: 2px;
+  padding-left : 15px;
+  padding-right: 15px;
+  background-color: #fff;
+  border: 3px solid orange;
+  float:left;
+}
+.r{
+  display: inline-flex;
+  width: 47%;
+  justify-content: end;
+  padding-top: 2px;
+  padding-right: 15px;
+  background-color: #fff;
+  border: 3px solid orange;
+  float:right;
+}
+
+.b_wrapper{
+  display:inline-flex;
+  width: 100%;
+  gap: 15px; 
+}
+
+.lbl_button{
+    color:black;
+}
+
+.circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; /* Makes it a circle */
+  background: #fff;
+  color: #000;
+  border:2px solid #3498db;
+  /* Flexbox for perfect centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-weight: bold;
+  font-family: sans-serif;
+}
+.p_header{
+    display:grid;
+    grid-template-columns: 8% 92%;
+}
 @media screen and (max-width: 767px) {
     .row{
         flex-direction: column;

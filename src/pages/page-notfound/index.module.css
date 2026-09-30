@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+
+    justify-content: center;
+    /* Centers items horizontally */
+    align-items: center;
+}
+
+.cat {
+    float: left;
+}
+
+.txt {
+    float: left;
+
+}
+
+.shadow {
+    font-size: 8rem;
+    text-align: center;
+    height: 90vh;
+    line-height: 90vh;
+    color: rgba(0,0,0,0.8);
+   
+    font-family: 'Niconne', cursive;
+    font-weight: 700;
+    text-shadow: 2px 2px 0px #eb452b;
+
+       
+        
+}

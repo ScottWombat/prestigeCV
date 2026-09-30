@@ -1,11 +1,55 @@
+.main1{
+    display:relative;
+    width:100%;
+    color:#000;
+    background-color: aqua;
+    margin-top:0;
+    background-image: url("/images/home/home-bg1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /*background-color: rgba(252, 252, 252, 0.5);*/
+    height:400px;
+    background-blend-mode: lighten;
+    
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .line {
+  width: 70%;
+  height: 70px;
+  position: relative;
+  overflow: hidden;
+}
+.container .line span {
+  position: absolute;
+  font-size: 3rem;
+  line-height: 4.2rem;
+  font-size:28px;
+}
+.square {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  background-color: #68ffef;
+}
+.text{
+    color:red;
+}
+/*
 @media print {
-    /* Set the default page size for printing */
+   
     @page {
-        size: A4; /* Shorthand for 210mm 297mm */
-        margin: 0; /* Optional: adjust margins as needed */
+        size: A4; 
+        margin: 0; 
     }
 
-    /* Style the body and any wrapping div to fit the A4 dimensions */
+  
     body {
         width: 210mm;
         height: 297mm;
@@ -14,12 +58,12 @@
         box-sizing: border-box;
     }
 
-    /* Optional: a specific class for the page container */
+    
     .a4-page {
         width: 210mm;
         height: 297mm;
         box-sizing: border-box;
-        /* Add visual styles for screen display, e.g., border/shadow */
+        
         border: 1px solid black;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         
@@ -27,7 +71,7 @@
 }
 
 .a4-page {
-    margin: 0px auto; /* Center on screen */
+    margin: 0px auto; 
     margin-top:100px;
     width: 210mm;
     height: 297mm;
@@ -36,5 +80,90 @@
     background-color: #fff;
     padding:20px;
    
+
+}
+*/
+.textContainerRef{
+    width:80%;
+    margin:auto;
+    position:relative;
+}
+.text1{
+    font-size: 2.5em;
+    font-family:"Unbounded", 'Times New Roman', serif;
+    color:green;
+    position:absolute;
+    margin-top: 190px;
+    margin-left: 50px;
+    z-index:5;
+    /* Styles apply to viewports 768px wide or smaller */
+
+}
+
+.text2{
+    font-size: 2.5em;
+    font-family:"Oswald", 'Times New Roman', serif;
+    color:#1E2A56;
+    margin-top:3px;
+    position:absolute;
+    font-weight: 900;
+    z-index:5;
+}
+.text3{
+    font-size: 2.0em;
+    font-family:"Oswald", 'Times New Roman', serif;
+    color:#1E2A56;
+     margin-top:70px;
+     margin-left:-50px;
+    position:absolute;
+    z-index:5;
+    
+}
+.img_center{
+   float:right;
+   opacity:0.9;
+   z-index:-2
+}
+.start_now{
+    margin-top:350px;
+    margin-left:450px;
+}
+.logo {
+ /*animation: blinker 15s linear infinite;*/
+  width: 150px;
+  height: auto;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Styles apply to viewports 768px wide or smaller */
+@media screen and (max-width: 768px) {
+  .img_center{
+    margin-top:-50px;
+  }
+  .text1{
+    font-size: 1em;
+    margin-top:260px;
+    margin-left:-20px;
+  }
+
+.text2{
+    font-size: 1em;
+    margin-top:150px;
+    margin-left:0px;
+  }
+.text3{
+    font-size: 0.8em;
+    margin-top:180px;
+    margin-left:-20px;
+  }
+  .start_now{
+    margin-top:50px;
+    margin-left:50px;
+  }
 
 }

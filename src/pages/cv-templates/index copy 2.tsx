@@ -1,47 +1,28 @@
 import { useState, useEffect,useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@store/index';
-import { actions } from '@store/cv-reducer';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router'
 /*import './App.css'*/
 import './index.css'
 import { useAppSelector } from '@store/hooks';
-import { selectTemplateType } from '@store/cv-reducer';
                                 
-import { selectTemplatesByStyle ,filterTemplatesByStyle,selectClassicTemplates,selectAbstractemplates,selectModernTemplates} from '@store/cv-reducer';
+import { selectTemplatesByStyle ,filterTemplatesByStyle,selectAbstractemplates} from '@store/cv-reducer';
 import * as T from './index.sytled'
 
 const CVTemplates = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const templateType = useAppSelector(selectTemplateType);
     
-    const [selectedValue, setSelectedValue] = useState(templateType);
-    const classicTemplates = useAppSelector(selectClassicTemplates)
-    const abstractTemplates = useAppSelector(selectAbstractemplates)
-    const modernTemplates = useAppSelector(selectModernTemplates)
-    //const abstractTemplates = useAppSelector(state => filterTemplatesByStyle(state,"abstract"))
+    const [selectedValue, setSelectedValue] = useState("classic");
+    const classicTemplates = useAppSelector(selectAbstractemplates)
+    const abstractTemplates = useAppSelector(state => filterTemplatesByStyle(state,"abstract"))
     //const classicTemplates =useAppSelector(state => filterTemplatesByStyle(state,"classic"))
-    //const modernTemplates =useAppSelector(state => filterTemplatesByStyle(state,"modern"))
+    const modernTemplates =useAppSelector(state => filterTemplatesByStyle(state,"modern"))
     const [templates, setTemplates] = useState(abstractTemplates)
-    const [visibleCount, setVisibleCount] = useState(abstractTemplates.length);
+    const [visibleCount, setVisibleCount] = useState(templates.lenght);
 
     // const defaultTemplateType = useMemo(() => {
     //return setTemplates(classicTemplates);
     //}, []); 
     useEffect(() => {
-        console.log(selectedValue)
-        console.log(visibleCount)
-       // setTemplates(templates);
-        if(selectedValue === 'abstract'){
-            setTemplates(abstractTemplates)
-            setVisibleCount(abstractTemplates.length)
-        }else if (selectedValue === 'classic'){
-            setTemplates(classicTemplates)
-        }else{
-             setTemplates(modernTemplates);
-        }
-       
-       
+        setTemplates(classicTemplates);
     },[])
    
     const handleChange = (event) => {
@@ -56,8 +37,7 @@ const CVTemplates = () => {
         }else{
             setTemplates(modernTemplates)
         }
-        console.log(event.target.value)
-        dispatch(actions.updateTemplateType( event.target.value))
+     
     };
     const loadMore = () => {
         setVisibleCount((prevCount) => prevCount + 10);
@@ -69,17 +49,6 @@ const CVTemplates = () => {
                 <T.FormContainer>
                                     <T.Title>Select&nbsp;Resume&nbsp;Style &nbsp;:</T.Title>
                                     <T.RadioGroup>
-                                        <T.Label>
-                                            <T.HiddenInput
-                                                name="plan"
-                                                value="abstract"
-                                                checked={selectedValue === "abstract"}
-                                                onChange={handleChange}
-                                            />
-                                            <T.CustomRadio />
-                                            Abstract
-                                        </T.Label>
-                                        
                                         <T.Label>
                                             <T.HiddenInput
                                                 name="plan"
@@ -100,6 +69,16 @@ const CVTemplates = () => {
                                             <T.CustomRadio />
                                             Modern
                                         </T.Label>
+                                         <T.Label>
+                                            <T.HiddenInput
+                                                name="plan"
+                                                value="abstract"
+                                                checked={selectedValue === "abstract"}
+                                                onChange={handleChange}
+                                            />
+                                            <T.CustomRadio />
+                                            Abstract
+                                        </T.Label>
                                         
                                     </T.RadioGroup>
                                 </T.FormContainer>
@@ -109,9 +88,9 @@ const CVTemplates = () => {
                 <div className="gallery">
                      {templates.slice(0, visibleCount).map((data) => (
                      
-                    <Link to={`/createcv/${data.id}/${data.templateId}/${data.type}/${data.isImageProfileRequired}/${data.imageProfileStyle}/${data.bgImage}`}>
+                      <Link to={`/createcv/${data.name}/image/${data.image}`}>
                      <div className="thumbnail-container">
-                        <img src={`/images/templates/${selectedValue}/template${data.id}.png`} alt="Thumbnail" />
+                        <img src={`/images/templates/${data.name}.png`} alt="Thumbnail" />
                          <div className="overlay">
                                     <div className="text">CREATE CV</div>
                         </div>
@@ -123,9 +102,6 @@ const CVTemplates = () => {
                 </div>
                
             </div>
-            {visibleCount < templates.length && (
-                <button onClick={loadMore}>Load More</button>
-            )}
             
         </div>
     )

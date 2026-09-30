@@ -1,204 +1,154 @@
-import './test.scss';
-import React, { ReactNode, Ref, useState, useEffect, useRef, Fragment } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useParams, useSearchParams, } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@store/index';
+import { useAppSelector } from '@store/hooks';
+//import { getTemplates } from '@store/template-reducer';
+import { getCV } from '@store/cv-reducer';
 
-import ReactToPrint from "react-to-print";
-
-import { useParams,useSearchParams, } from "react-router";
-import { useReactToPrint } from 'react-to-print';
-
-import { PersonalDetails } from '@components/personal-details'
-
-import { Test1 } from '@components/test1'
-
-
-import { EntrySection, TemplateSection, PersonalDetailsWrapper, EducationWrapper } from './createcv.styled'
-
-import './index.css'
-import './new.css'
-
-import { Education } from '@components/education'
-//import { Template1 } from '@components/templates/template1';
-import TemplateLoader from '@utils/template-loader'
-const steps = [
-  {
-    label: 'Personal Details',
-    step: 1,
-  },
-  {
-    label: 'Objectives',
-    step: 2,
-  },
-  {
-    label: 'Skills',
-    step: 4,
-  },
-  {
-    label: 'Work Experiences',
-    step: 5,
-  },
-  {
-    label: 'Education',
-    step: 6,
-  },
-  {
-    label: 'Referees',
-    step: 7,
-  },
-  {
-    label: 'Complete',
-    step: 8,
-  },
-]
+import styles from './latest.module.css'
+import TimeLine from '@components/timeline';
+import { UploadImage } from '@components/upload-image';
+import TemplateLoader from '@utils/template-loader';
+import { PersonalDetails } from '@components/personal-details';
+import { Step1, Step2, Step3, Step4, Step5, Step6 } from '@components/steps';
+import { IPersonInfo} from "@store/resume-type";
+import { actions,selectPersonInfo } from '@store/cv-reducer'
+import StepIndicator from '@components/step-indicator';
+import PageNotFound from 'pages/page-notfound';
+import CreateCVSection from './create-cv-section';
+ 
 /*
-interface ComponentToPrintProps extends ReactElement{
-  children: ReactNode;
-  ref?: Ref<HTMLDivElement>;
+type ResumeState = {
+    template: string | null
+    personInfo: IPersonInfo | null
+    education: [IEducation] | IEducation[]
+    experience:  [IExperience] | IExperience[]
 }
 
-type FooProps = {
-  children: ReactNode;
-  ref?: Ref<HTMLDivElement>;
+
+interface IResume{
+    personInfo: IPersonInfo;
+    work: IExperience[] | [IExperience];
+    education: IEducation[] | [IEducation];
+    skill?: ISkill[] | [ISkill];
+    tool?: ITool[] | [ITool];
+    referee?: IReferee[] | [IReferee]
+}
+interface IPersonInfo{
+    firstName: string;
+    //lastName: string;
+    //image: string;
+    //addr: string;
+    //mobile: string;
+    //email: string;
+}
+interface IExperience{
+    period: string;
+    position: string;
+    company: string;
+    detail: string;
+}
+interface IEducation{
+    period: string;
+    instution: string;
+    degree: string
+}
+interface ITool{
+    name: string;
+}
+interface ISkill{
+    name: string
+}
+interface IReferee{
+    name: string;
+    position: string;
+    email: string;
+    mobile: string;
 }
 */
-const ComponentToPrint = (props: { children: ReactNode, ref: Ref<HTMLDivElement> }) => {
-  return (
-    <div
-      ref={props.ref}
-      className="print-source"
-      style={{ position: "relative", height: "100%", width: "100%" }}
-    >
-      {props.children}
-      <style type="text/css" media="print">
-        {`@page { size: landscape; }`}
-      </style>
-    </div>
-  );
-};
-const CreateCV = (props) => {
-  const contentRef = useRef(null);
-  const chartRef = useRef(null);
-  const params = useParams();
-  const [search, setSearch] = useSearchParams();
-  useEffect(() => {
-   // console.log(`Params:${params}`)
-   // setTemplateId(params.id)
-   // console.log(`Search:${search.get('id')}`)
-   setTemplateId(search.get('id'))
-  }, [])
-
-  const [templateId, setTemplateId] = useState('')
-  const [activeStep, setActiveStep] = useState(1)
-  const [isRight, setRight] = useState(false)
-  const nextStep = () => {
-    setActiveStep(activeStep + 1)
-    setRight(!isRight);
-  }
-
-  const prevStep = () => {
-    setActiveStep(activeStep - 1)
-    setRight(!isRight);
-  }
-
-  const totalSteps = steps.length
-
-  const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`
-
-  const displayedForm = (step: number) => {
-    switch (step) {
-      case 1:
-        return <PersonalDetails />
-      case 2:
-        return (<>2</>)
-      default:
-        return (<>Default</>)
+const CreateCV = () => {
+    const params = useParams();
+  
+    const dispatch = useDispatch<AppDispatch>();
+    const personInfoData = useAppSelector(selectPersonInfo)
+    //const templates = useAppSelector(getTemplates)
+    //const [resume, setResume] = useState({ personInfo: {}, experience: [], education: [] })
+    const [resume, setResume] = useState(useAppSelector(getCV))
+    const [personInfo,setPersonInfo] = useState({})
+    //const [personInfo,setPersonInfo] = useState(useAppSelector(selectPersonInfo))
+    const componentRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [templateId, setTemplateId] = useState('')
+    //const [imageRequired, setImageRequired] = useState(false)
+    const [isTemplateExisted,setIsTemplateExisted] = useState(false)
+    //const [search, setSearch] = useSearchParams();
+    //const [id, imageRequired] = search
+    /*
+    const validateTemplate = (templateId) =>{
+       
+        import (`../../components/templates/${templateId}`)
+      .then((module) => {
+    
+       setIsTemplateExisted(true)
+      
+      })
+      .catch((err) => {
+        console.error("Failed to load component", err);
+      });
     }
-  }
 
-  const componentRef = useRef(null);
+    useEffect(() => {
+     
+    },[personInfo])
 
-  const handlePrint = useReactToPrint({
-    // @ts-ignore or use "as any"
-    //content: () => componentRef.current,
-    documentTitle: 'RRR',
-    contentRef: componentRef,
-
-    pageStyle: `
-      @media print {
-        @page { margin: 0; }
-      }
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust:exact !important;
+    
+    useEffect(() => {
+        
+    }, [])
+   */
+    /*
+    const onNextClick = () => {
+        setCurrentPage(currentPage + 1)
+    }
+    const onBackClick = () => {
+        setCurrentPage(currentPage - 1)
+    }
+    const handleChangeStep1 = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        setPersonInfo(prevPersonInfo => ({
+            ...prevPersonInfo,
+            [name]: value
+        }))
+        dispatch(actions.updatePersonInfo({...personInfoData,[name]: value}))
+        
+    }
+    const handleChangeStep3 = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        console.log("Click")
+    }
+    const handleChange = (event) =>{
+        console.log(`CurrentPage:${currentPage}`)
+        if (currentPage == 1){
+            return handleChangeStep1(event)
+        }else if (currentPage == 3){
+          
+            return handleChangeStep3(event)
+        }
+    }
+        */
+    /*
+    id?: number //will combine with template text
+    isImageProfileRequired:  boolean
+    imageStyle: string //square,cicle
+    isImageBGRequired: boolean
+    */
+    return (
+        //<CreateCVSection templateId={params.id} imageRequired={params.imageRequired} handleChange={handleChange} handleChangeStep1={handleChangeStep1} handleChangeStep3={handleChangeStep3} />
+        <CreateCVSection id={params.id} templateId={params.templateId} type={params.type} isImageProfileRequired={params.isImageProfileRequired} imageStyle={params.imageStyle} bgImage={params.bgImage}/>
+        //isTemplateExisted ? <CreateCVSection templateId={templateId} handleChangeStep={handleChange} imageRequired={true} resume={resume}/>: <PageNotFound/>
+    )
 }
-      }
-    `,
-  });
-
-  return (
-    <div className='create_cv_section'>
-      <div className='ccv_header'>BUILD YOUR OWN CV1{templateId}</div>
-      <div className="progress-steps">
-        <div className="progress-steps__container">
-          {steps.map(({ step, label }) => (
-            <div className="progress-steps__item" key={step}>
-              <div
-                className={`progress-steps__circle ${activeStep >= step ? 'progress-steps__circle--completed' : ''
-                  }`}>
-                {activeStep > step ? (
-                  <div className="progress-steps__checkmark">L</div>
-                ) : (
-                  <span className="progress-steps__count">{step}</span>
-                )}
-              </div>
-              <div className="progress-steps__label-container">
-                <span className="progress-steps__label" key={step}>
-                  {label}
-                </span>
-              </div>
-            </div>
-          ))}
-          <div className="progress-steps__filled-line" style={{ width: width }}></div>
-        </div>
-        <div className="progress-steps__buttons">
-          <button className="progress-steps__button" onClick={prevStep} disabled={activeStep === 1}>
-            Previous
-          </button>
-          <button
-            className="progress-steps__button"
-            onClick={nextStep}
-            disabled={activeStep === totalSteps}>
-            Next
-          </button>
-        </div>
-      </div>
-
-      <div className="mainContent">
-        <Fragment>
-          <div className="row">
-            <div className="column1" >
-              ggg
-            </div>
-            <div className="column2">
-             
-              <div ref={componentRef}>
-                <TemplateLoader index={templateId} />
-              </div>
-            </div>
-            <div className='column3'>
-              <div className="print_button_div">
-                <button className="print_button" onClick={handlePrint}>Print to PDF</button>
-              </div>
-            </div>
-          </div>
-        </Fragment>
-
-
-
-      </div>
-    </div>
-
-  )
-
-}
-
 export default CreateCV;

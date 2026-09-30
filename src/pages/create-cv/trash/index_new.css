@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+:root {
+    --primary: #fff;
+    --secondary: #fff;
+    --errorColor: red;
+    --stepNumber: 6;
+    --containerWidth: 600px;
+    --bgColor: #fff;
+    --inputBorderColor: lightgray;
+}
+.createcv_wrapper{
+    position: relative;
+    width: 400px;
+    background-color: #fff;
+    margin-top:50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "timeline"
+        "maincontent"
+        "navbuttons";
+    overflow: hidden;
+}
+.timeline{
+    grid-area: timeline;
+    width:100%;
+}
+.main_content{
+    grid-area: maincontent;
+    width:100%;
+    height:200px;
+    overflow: hidden;
+    margin-top:150px;
+    font-family: 'Poppins';
+    background-color: #fff;
+}
+.main_content form {
+    display: flex;
+    width: calc(100% * var(--stepNumber));
+}
+.main_content form .page {
+    width: calc(100% / var(--stepNumber));
+    /*width: 100%;*/
+    transition: margin-left 0.3s ease-in-out;
+}
+.main_content form .page1 {
+    width: calc(100% / var(--stepNumber));
+    /*width: 100%;*/
+    transition: margin-left 0.3s ease-in-out;
+    margin-left:  0px;;
+}
+
+.person_title {
+    text-align: left;
+    font-size: 25px;
+    font-weight: 500;
+    color:#000;
+}
+.field {
+    width: var(--containerWidth);
+    height: 40px;
+    margin: 35px 0;
+    display: flex;
+    position: relative;
+    color:#000;
+    background-color: beige;
+}
+.field .label {
+    position: absolute;
+    top: -25px;
+    font-weight: 500;
+    font-size: 18px;
+}
+.form_input {
+    box-sizing: border-box;
+    background-color: #E3F1FF;
+    height: 80%;
+    width: 60%;
+    border: 1px solid var(--inputBorderColor);
+    border-radius: 5px;
+    padding-left: 15px;
+    margin: 0 1px;
+    font-size: 18px;
+    transition: border-color 150ms ease;
+}
+form .page .field input.invalid-input {
+    border-color: var(--errorColor);
+}
+form .page .field select {
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    font-weight: 500;
+}
+form .page .field button {
+    width: 100%;
+    height: calc(100% + 5px);
+    border: none;
+    background: var(--secondary);
+    margin-top: -20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+}
+form .page .field button:hover {
+    background: #000;
+}
+form .page .btns button {
+    margin-top: -20px !important;
+}
+form .page .btns button.prev {
+    margin-right: 3px;
+    font-size: 17px;
+}
+form .page .btns button.next {
+    margin-left: 3px;
+}
+.container .progress-bar {
+    display: flex;
+    margin: 40px 0;
+    user-select: none;
+}
+.container .progress-bar .step {
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+.container .progress-bar .step p {
+    font-weight: 500;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 8px;
+}
+.nav_buttons{
+    grid-area: navbuttons;
+    width: 100%;
+}
+.person_info{
+    position: relative;
+    width:100%;
+    background-color: aqua;
+    height:200px;
+}
+.objective{
+    position: relative;
+
+    width:100%;
+    background-color: blue;
+    height:200px;
+}
+.experience{
+    position: relative;
+
+    width:100%;
+    background-color: rosybrown;
+    height:200px;
+}
+.education{
+    position: relative;
+    color:#000;
+    width:100%;
+    background-color: blueviolet;
+    height:200px;
+}
+

@@ -1,0 +1,118 @@
+.main {
+    margin-top: 100px;
+    color: #000;
+}
+
+.oswald {
+    font-family: 'Oswald';
+
+}
+
+.sacramento {
+    font-family: 'Sacramento';
+    font-size: 2em;
+}
+
+.audiowide {
+    font-family: 'Audiowide';
+}
+
+.orbitron {
+    font-family: 'Orbitron';
+}
+
+.lato {
+    font-family: 'Lato';
+}
+
+.montserrat {
+    font-family: 'Montserrat';
+}
+
+.coiny {
+    font-family: 'Coiny';
+}
+
+.poppins {
+    font-family: 'Poppins';
+}
+
+.syne {
+    font-family: 'Syne';
+}
+
+.unbounded {
+    font-family: 'Unbounded';
+}
+
+.cairo {
+    font-family: 'Cairo';
+}
+
+.bebas_neue {
+    font-family: 'Bebas Neue';
+}
+
+.anton {
+    font-family: 'Anton';
+}
+
+.raleway {
+    font-family: 'Raleway'
+}
+
+.abril_fatface {
+    font-family: 'abril fatface';
+    font-size: 48px;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+}
+
+.philosopher {
+    font-family: 'Philosopher';
+    font-size: 48px;
+    font-weight: 900;
+}
+
+/*
+@media print {
+   
+    @page {
+        size: A4; 
+        margin: 0; 
+    }
+
+  
+    body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    
+    .a4-page {
+        width: 210mm;
+        height: 297mm;
+        box-sizing: border-box;
+        
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+    }
+}
+
+.a4-page {
+    margin: 0px auto; 
+    margin-top:100px;
+    width: 210mm;
+    height: 297mm;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding:20px;
+   
+
+}
+*/
